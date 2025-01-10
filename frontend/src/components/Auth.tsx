@@ -1,0 +1,38 @@
+'use client'
+
+import { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
+import { SignUp } from './SignUp';
+import { SignIn } from './SignIn';
+import { Button } from "@/components/ui/button"
+
+export function Auth() {
+  const { username, signOut } = useAuth();
+  const [isSignUp, setIsSignUp] = useState(true);
+
+  const toggleForm = () => setIsSignUp(!isSignUp);
+
+  return (
+    <div className="space-y-8 w-full max-w-md">
+      {username ? (
+        <div className="text-center">
+          <p className="mb-4">Welcome, {username}!</p>
+          <Button onClick={signOut}>Sign Out</Button>
+        </div>
+      ) : (
+        <>
+          <div>
+            <h2 className="text-2xl font-bold mb-4">{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
+            {isSignUp ? <SignUp /> : <SignIn />}
+          </div>
+          <div className="text-center">
+            <Button variant="link" onClick={toggleForm}>
+              {isSignUp ? 'Already have an account? Sign In' : 'Need an account? Sign Up'}
+            </Button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
