@@ -1,7 +1,8 @@
-import { Suspense } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { PropertyValueChart } from '@/components/property-value-chart'
+import { Suspense } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { PropertyValueChart } from '@/components/property-value-chart';
+import Navbar from '@/components/navbar';
 
 const mockData = {
   totalProperties: 4,
@@ -17,8 +18,8 @@ const mockData = {
       priceHistory: [
         { date: '2024-01', value: 45 },
         { date: '2024-02', value: 48 },
-        { date: '2024-03', value: 54 }
-      ]
+        { date: '2024-03', value: 54 },
+      ],
     },
     {
       id: 'nash',
@@ -30,8 +31,8 @@ const mockData = {
       priceHistory: [
         { date: '2024-01', value: 120 },
         { date: '2024-02', value: 125 },
-        { date: '2024-03', value: 130 }
-      ]
+        { date: '2024-03', value: 130 },
+      ],
     },
     {
       id: 'pic',
@@ -43,8 +44,8 @@ const mockData = {
       priceHistory: [
         { date: '2024-01', value: 130 },
         { date: '2024-02', value: 135 },
-        { date: '2024-03', value: 140 }
-      ]
+        { date: '2024-03', value: 140 },
+      ],
     },
     {
       id: 'ild',
@@ -56,36 +57,48 @@ const mockData = {
       priceHistory: [
         { date: '2024-01', value: 95 },
         { date: '2024-02', value: 98 },
-        { date: '2024-03', value: 100 }
-      ]
-    }
-  ]
-}
+        { date: '2024-03', value: 100 },
+      ],
+    },
+  ],
+};
 
 async function CollectionsContent() {
-  // Replace with actual data fetching
-  const data = mockData
+  const data = mockData;
 
   return (
-    <div className="p-6 space-y-6 max-w-5xl mx-auto">
+    <>
+    <Navbar/>
+    <div className="p-6 mt-20 space-y-8 max-w-5xl mx-auto bg-gray-100 rounded-lg shadow-md">
+      {/* Overview Section */}
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Properties Overview */}
-        <Card>
+        <Card className="bg-white shadow-md">
           <CardHeader>
-            <CardTitle>{data.totalProperties} properties owned</CardTitle>
+            <CardTitle className="text-xl font-semibold">
+              {data.totalProperties} Properties Owned
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{data.totalValue} usdt</div>
+            <div className="text-4xl font-extrabold text-gray-800">
+              {data.totalValue} USDT
+            </div>
+            <p className="mt-2 text-gray-600">
+              The total value of your portfolio is {data.totalValue} USDT,
+              distributed across {data.totalProperties} properties. You can
+              manage your investments and monitor their growth here.
+            </p>
           </CardContent>
         </Card>
 
         {/* Featured Property Chart */}
-        <Card>
+        <Card className="bg-white shadow-md">
           <CardHeader>
-            <CardTitle>{data.properties[0].name}</CardTitle>
+            <CardTitle className="text-xl font-semibold">
+              {data.properties[0].name}
+            </CardTitle>
           </CardHeader>
           <CardContent className="pt-2">
-            <div className="h-[180px]">
+            <div className="h-[200px]">
               <PropertyValueChart property={data.properties[0]} />
             </div>
           </CardContent>
@@ -93,9 +106,9 @@ async function CollectionsContent() {
       </div>
 
       {/* Rent Section */}
-      <Card>
+      <Card className="bg-white shadow-md">
         <CardHeader>
-          <CardTitle>RENT</CardTitle>
+          <CardTitle className="text-xl font-semibold">Rent Overview</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -104,18 +117,28 @@ async function CollectionsContent() {
                 key={property.id}
                 className="flex items-center justify-between border-b pb-2 last:border-0"
               >
-                <span>{property.name}</span>
-                <span>{property.rent} {property.currency}</span>
+                <span className="font-medium text-gray-700">{property.name}</span>
+                <span className="text-gray-600">
+                  {property.rent} {property.currency}
+                </span>
               </div>
             ))}
-            <Button variant="outline" className="w-full">
-              View more
+            <Button variant="outline" className="w-full text-gray-800">
+              View More
             </Button>
           </div>
         </CardContent>
       </Card>
+
+      {/* Sell USDT Section */}
+      <div className="flex justify-center mt-6">
+        <Button variant="primary" className="w-full max-w-sm bg-blue-600 text-white">
+          Sell USDT
+        </Button>
+      </div>
     </div>
-  )
+    </>
+  );
 }
 
 export default function CollectionsPage() {
@@ -123,6 +146,5 @@ export default function CollectionsPage() {
     <Suspense fallback={<div>Loading...</div>}>
       <CollectionsContent />
     </Suspense>
-  )
+  );
 }
-

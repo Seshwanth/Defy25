@@ -6,12 +6,13 @@ import { SidebarFilters } from '@/components/sidebar-filters'
 import { PropertyCard } from '@/components/property-card'
 import { PropertyDetailModal } from '@/components/property-modal-detail'
 import { WalletConnect } from '@/components/wallet-connect'
+import Navbar from '@/components/navbar'
 
 // Sample data - replace with your actual data fetching logic
 const SAMPLE_PROPERTIES: Property[] = [
   {
     id: '1',
-    image: '/placeholder.svg?height=400&width=400',
+    image: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyaminmellish-186077.jpg&fm=jpg',
     estimatedValue: 5000000,
     pricePerNFT: 20,
     totalNFTs: 1000,
@@ -22,7 +23,7 @@ const SAMPLE_PROPERTIES: Property[] = [
   },
   {
     id: '2',
-    image: '/placeholder.svg?height=400&width=400',
+    image: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyaminmellish-186077.jpg&fm=jpg',
     estimatedValue: 750000,
     pricePerNFT: 15,
     totalNFTs: 500,
@@ -33,7 +34,7 @@ const SAMPLE_PROPERTIES: Property[] = [
   },
   {
     id: '3',
-    image: '/placeholder.svg?height=400&width=400',
+    image: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyaminmellish-186077.jpg&fm=jpg',
     estimatedValue: 2000000,
     pricePerNFT: 25,
     totalNFTs: 800,
@@ -44,7 +45,7 @@ const SAMPLE_PROPERTIES: Property[] = [
   },
   {
     id: '4',
-    image: '/placeholder.svg?height=400&width=400',
+    image: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyaminmellish-186077.jpg&fm=jpg',
     estimatedValue: 3500000,
     pricePerNFT: 30,
     totalNFTs: 1200,
@@ -55,7 +56,7 @@ const SAMPLE_PROPERTIES: Property[] = [
   },
   {
     id: '5',
-    image: '/placeholder.svg?height=400&width=400',
+    image: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyaminmellish-186077.jpg&fm=jpg',
     estimatedValue: 1200000,
     pricePerNFT: 18,
     totalNFTs: 600,
@@ -66,7 +67,7 @@ const SAMPLE_PROPERTIES: Property[] = [
   },
   {
     id: '6',
-    image: '/placeholder.svg?height=400&width=400',
+    image: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyaminmellish-186077.jpg&fm=jpg',
     estimatedValue: 8000000,
     pricePerNFT: 40,
     totalNFTs: 2000,
@@ -95,6 +96,8 @@ export default function Marketplace() {
   }
 
   return (
+    <>
+    <Navbar />
     <div className="flex min-h-screen bg-background">
       <SidebarFilters filters={filters} onFilterChange={setFilters} />
       <main className="flex-1 overflow-auto">
@@ -123,6 +126,7 @@ export default function Marketplace() {
         <WalletConnect onClose={() => setShowWalletConnect(false)} />
       )}
     </div>
+    </>
   )
 }
 

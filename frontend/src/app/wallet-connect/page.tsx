@@ -27,7 +27,7 @@ export default function WalletConnect() {
         throw new Error('Please install MetaMask or another Web3 wallet')
       }
 
-      const provider = new ethers.BrowserProvider(window.ethereum)
+      const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
       await provider.send("eth_requestAccounts", [])
       const signer = await provider.getSigner()
       const address = await signer.getAddress()
