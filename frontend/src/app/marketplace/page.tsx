@@ -6,7 +6,6 @@ import { SidebarFilters } from "@/components/sidebar-filters";
 import { PropertyCard } from "@/components/property-card";
 import { PropertyDetailModal } from "@/components/property-modal-detail";
 import { WalletConnect } from "@/components/wallet-connect";
-import Navbar from "@/components/navbar";
 
 // Sample data - replace with your actual data fetching logic
 const SAMPLE_PROPERTIES: Property[] = [

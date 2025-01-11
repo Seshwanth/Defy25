@@ -1,13 +1,11 @@
-export default function SignInPage() {
+import { Auth } from '@/components/Auth';
+
+export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="py-16 sm:py-24">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-            Sign In
-          </h1>
-        </div>
-      </main>
-    </div>
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <h1 className="text-4xl font-bold mb-8">Authentication</h1>
+      <Auth />
+    </main>
   );
 }
+

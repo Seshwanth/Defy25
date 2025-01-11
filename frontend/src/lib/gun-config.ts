@@ -1,15 +1,25 @@
 import Gun from 'gun';
-import 'gun/sea';
-import 'gun/axe';
+import 'gun/sea'; // Security, Encryption, Authorization module
+import 'gun/axe'; // Relay mesh networking optimization
+import { TextEncoder, TextDecoder } from 'text-encoding'; // Polyfill for SEA
 
-// Initialize Gun
+// Polyfill for SEA compatibility
+if (typeof window !== 'undefined') {
+  if (!window.TextEncoder) {
+    window.TextEncoder = TextEncoder;
+  }
+  if (!window.TextDecoder) {
+    window.TextDecoder = TextDecoder;
+  }
+}
+
+// Initialize Gun instance
 const gun = Gun({
-  peers: ['http://localhost:8765/gun'] // You can add more peer servers here
+  peers: ['http://localhost:8765/gun'], // Add more relay servers if needed
 });
 
-// Export the gun instance
+// Ensure that SEA (security) works with sessions properly
+export const user = gun.user().recall({ sessionStorage: true });
+
+// Export the Gun instance
 export default gun;
-
-// Export a user instance
-export const user = gun.user().recall({sessionStorage: true});
-
