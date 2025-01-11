@@ -101,7 +101,7 @@ export default function Marketplace() {
     <div className="flex min-h-screen bg-background">
       <SidebarFilters filters={filters} onFilterChange={setFilters} />
       <main className="flex-1 overflow-auto">
-        <div className="container mx-auto py-8">
+        <div className="container mx-auto py-8 px-4">
           <h1 className="mb-6 text-3xl font-bold">Property Marketplace</h1>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {SAMPLE_PROPERTIES.map((property) => (
