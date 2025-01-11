@@ -1,4 +1,4 @@
-import Navbar from '@/components/navbar'
+import Navbar from "@/components/navbar";
 
 export default function SignInPage() {
   return (
@@ -12,6 +12,5 @@ export default function SignInPage() {
         </div>
       </main>
     </div>
-  )
+  );
 }
-

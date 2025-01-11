@@ -8,4 +8,14 @@ import Navbar from "./navbar";
 import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
 
-export { CTA, Features, Hero, HowItWorks, Header, Footer, Navbar , SignIn , SignUp};
+export {
+  CTA,
+  Features,
+  Hero,
+  HowItWorks,
+  Header,
+  Footer,
+  Navbar,
+  SignIn,
+  SignUp,
+};

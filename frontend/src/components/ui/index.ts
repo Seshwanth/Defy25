@@ -21,6 +21,8 @@ import {
 } from "./dialog";
 import { Progress } from "./progress";
 import { Slider } from "./slider";
+import { Textarea } from "./textarea";
+import { RadioGroup, RadioGroupItem } from "./radio-group";
 
 export {
   Button,
@@ -44,4 +46,7 @@ export {
   DialogTrigger,
   Progress,
   Slider,
+  Textarea,
+  RadioGroup,
+  RadioGroupItem,
 };
