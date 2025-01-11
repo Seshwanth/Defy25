@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Navbar from "@/components/navbar";
 import { motion } from "framer-motion";
 import { ArrowDownCircle } from "lucide-react";
 
@@ -19,7 +18,6 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-100">
-      <Navbar />
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           className="py-16 sm:py-24"

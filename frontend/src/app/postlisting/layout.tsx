@@ -11,7 +11,7 @@ export default function PostListingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen ">
       <main className="pt-16 pb-8 px-4 sm:px-6 lg:px-8">
         {children}
       </main>

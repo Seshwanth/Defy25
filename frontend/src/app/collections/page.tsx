@@ -68,7 +68,6 @@ async function CollectionsContent() {
 
   return (
     <>
-      <Navbar />
       <div className="p-6 mt-20 space-y-8 max-w-5xl mx-auto bg-gray-100 rounded-lg shadow-md">
         {/* Overview Section */}
         <div className="grid gap-6 md:grid-cols-2">
