@@ -16,12 +16,11 @@ export default function Hero() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Link href="/marketplace">
-              <Button 
-                size="lg" 
+              <div 
                 className="w-full sm:w-auto bg-white text-gray-900 font-semibold hover:bg-gray-200 transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg"
               >
                 Get Started
-              </Button>
+              </div>
             </Link>
             <Button 
               size="lg" 

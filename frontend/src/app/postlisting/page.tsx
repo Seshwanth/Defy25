@@ -8,10 +8,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { toast } from "@/components/ui/toast"
+import { toast } from "sonner"
 import { submitListing } from './actions'
 import { Building, DollarSign, FileText, ImageIcon, Share2 } from 'lucide-react'
-import GeometricBackground from '@/components/GeometricBackground'
 
 export default function PostListing() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -32,7 +31,7 @@ export default function PostListing() {
       })
       router.push('/listings')
     } catch (error) {
-      Toast({
+      toast({
         title: "Error submitting listing",
         description: "Please try again later.",
         variant: "destructive",
@@ -51,23 +50,25 @@ export default function PostListing() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white py-12 px-4 sm:px-6 lg:px-8 relative">
-      {/* <GeometricBackground /> */}
+    <div className="min-h-screen text-black py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Geometric Pattern Background */}
+      <div className="absolute inset-0 bg-pattern opacity-20 z-0"></div>
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-3xl mx-auto bg-gray-800/80 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden relative z-10"
+        className="max-w-3xl mx-auto bg-white/10 backdrop-blur-xl rounded-xl shadow-2xl overflow-hidden relative z-10"
       >
         <div className="px-6 py-8 sm:px-10">
-          <h1 className="text-3xl font-extrabold text-center mb-8 text-gray-100">Post a New Listing</h1>
+          <h1 className="text-4xl font-extrabold text-center mb-8 text-black">Post a New Listing</h1>
           <form onSubmit={handleSubmit} className="space-y-6">
             {formFields.map((field) => (
               <motion.div key={field.name} whileHover={{ scale: 1.02 }} className="relative">
-                <Label htmlFor={field.name} className="block text-sm font-medium mb-1 text-gray-300">{field.label}</Label>
+                <Label htmlFor={field.name} className="block text-sm font-medium mb-1 text-black">{field.label}</Label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <field.icon className="h-5 w-5 text-gray-500" aria-hidden="true" />
+                    <field.icon className="h-5 w-5 text-black-300" aria-hidden="true" />
                   </div>
                   <Input
                     id={field.name}
@@ -75,22 +76,22 @@ export default function PostListing() {
                     type={field.type}
                     accept={field.accept}
                     required
-                    className="block w-full pl-10 sm:text-sm border-gray-600 rounded-md bg-gray-700/50 focus:ring-gray-500 focus:border-gray-500 text-gray-100 placeholder-gray-400"
+                    className="block w-full pl-10 sm:text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black placeholder-gray-400"
                   />
                 </div>
               </motion.div>
             ))}
             
             <motion.div whileHover={{ scale: 1.02 }} className="relative">
-              <Label className="block text-sm font-medium mb-1 text-gray-300">Revenue</Label>
+              <Label className="block text-sm font-medium mb-1 text-black">Revenue</Label>
               <RadioGroup defaultValue="no" onValueChange={(value) => setHasRevenue(value as 'yes' | 'no')} className="flex space-x-4">
                 <div className="flex items-center">
                   <RadioGroupItem value="yes" id="revenue-yes" className="text-gray-300" />
-                  <Label htmlFor="revenue-yes" className="ml-2 text-gray-300">Yes</Label>
+                  <Label htmlFor="revenue-yes" className="ml-2 text-black">Yes</Label>
                 </div>
                 <div className="flex items-center">
                   <RadioGroupItem value="no" id="revenue-no" className="text-gray-300" />
-                  <Label htmlFor="revenue-no" className="ml-2 text-gray-300">No</Label>
+                  <Label htmlFor="revenue-no" className="ml-2 text-black">No</Label>
                 </div>
               </RadioGroup>
             </motion.div>
@@ -103,10 +104,10 @@ export default function PostListing() {
                 transition={{ duration: 0.3 }}
                 className="relative"
               >
-                <Label htmlFor="rentingAgreement" className="block text-sm font-medium mb-1 text-gray-300">Renting Agreement (PDF Attachment)</Label>
+                <Label htmlFor="rentingAgreement" className="block text-sm font-medium mb-1 text-black">Renting Agreement (PDF Attachment)</Label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FileText className="h-5 w-5 text-gray-500" aria-hidden="true" />
+                    <FileText className="h-5 w-5 text-gray-300" aria-hidden="true" />
                   </div>
                   <Input
                     id="rentingAgreement"
@@ -114,33 +115,30 @@ export default function PostListing() {
                     type="file"
                     accept=".pdf"
                     required
-                    className="block w-full pl-10 sm:text-sm border-gray-600 rounded-md bg-gray-700/50 focus:ring-gray-500 focus:border-gray-500 text-gray-100"
+                    className="block w-full pl-10 sm:text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black"
                   />
                 </div>
               </motion.div>
             )}
             
             <motion.div whileHover={{ scale: 1.02 }} className="relative">
-              <Label htmlFor="description" className="block text-sm font-medium mb-1 text-gray-300">Description</Label>
+              <Label htmlFor="description" className="block text-sm font-medium mb-1 text-black">Description</Label>
               <Textarea
                 id="description"
                 name="description"
                 rows={4}
                 required
-                className="block w-full sm:text-sm border-gray-600 rounded-md bg-gray-700/50 focus:ring-gray-500 focus:border-gray-500 text-gray-100 placeholder-gray-400"
+                className="block w-full sm:text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black placeholder-gray-400"
               />
             </motion.div>
             
             <div className="flex justify-end">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit Listing'}
                 </Button>
-              </motion.div>
             </div>
           </form>
         </div>
@@ -148,4 +146,3 @@ export default function PostListing() {
     </div>
   )
 }
-

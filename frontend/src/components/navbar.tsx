@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Building, Contact, Info, LucideGitGraph } from "lucide-react";
+import { Building, Contact, Info, LucideGitGraph, ScrollText } from "lucide-react";
 
 export default function Navbar() {
   // Simulate checking for MetaMask sign-in status (you can replace this with actual MetaMask logic)
@@ -14,6 +14,10 @@ export default function Navbar() {
       <Link className="text-sm flex flfrom-gray-900 to-gray-800ex gap-2 items-center font-medium hover:underline underline-offset-4" href="/collections">
         <LucideGitGraph />
         Collections
+      </Link>
+      <Link className="text-sm flex gap-2 items-center  font-medium hover:underline underline-offset-4" href="/postlisting">
+      <ScrollText/>
+        Post Listing
       </Link>
       <Link className="text-sm flex gap-2 items-center  font-medium hover:underline underline-offset-4" href="/about">
         <Info />
