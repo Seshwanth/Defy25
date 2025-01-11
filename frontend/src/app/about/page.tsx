@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowDownCircle } from "lucide-react";
+import { Globe, Home, LucideBuilding } from "lucide-react";
 
 export default function AboutPage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,18 +28,18 @@ export default function AboutPage() {
         >
           <div className="text-center">
             <motion.h1
-              className="text-5xl font-extrabold tracking-tight sm:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400"
+              className="text-5xl font-extrabold tracking-tight sm:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-blue-400"
               variants={fadeIn}
             >
-              About Smith
+              About RETx
             </motion.h1>
             <motion.p
               className="mx-auto mt-6 max-w-2xl text-xl leading-8 text-gray-600"
               variants={fadeIn}
             >
-              Smith is a curated collection of premium products designed to
-              enhance your lifestyle. Our commitment to quality and design
-              excellence drives everything we do.
+              RETx is revolutionizing real estate with blockchain technology.
+              Our platform empowers users to securely invest, manage, and trade
+              real estate assets in a decentralized ecosystem.
             </motion.p>
           </div>
 
@@ -49,29 +49,32 @@ export default function AboutPage() {
           >
             {[
               {
-                title: "Our Mission",
+                title: "Secure Transactions",
                 description:
-                  "To provide exceptional products that combine functionality with elegant design.",
+                  "Leverage blockchain technology for transparent and secure property investments.",
+                icon: <LucideBuilding />,
               },
               {
-                title: "Our Vision",
+                title: "Global Accessibility",
                 description:
-                  "To become the leading destination for premium lifestyle products.",
+                  "Access real estate markets across the globe without geographical barriers.",
+                icon: <Globe />,
               },
               {
-                title: "Our Values",
+                title: "Fractional Ownership",
                 description:
-                  "Quality, innovation, and customer satisfaction guide every decision we make.",
+                  "Invest in real estate with fractional NFTs, making property ownership more accessible.",
+                icon: <Home />,
               },
-            ].map((item, index) => (
+            ].map((item, _index) => (
               <motion.div
                 key={item.title}
                 className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
                 whileHover={{ scale: 1.05 }}
                 variants={fadeIn}
               >
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-3xl">{["🎯", "👁️", "💎"][index]}</span>
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 text-green-600">
+                  {item.icon}
                 </div>
                 <h2 className="text-xl font-semibold text-gray-800">
                   {item.title}
@@ -79,14 +82,6 @@ export default function AboutPage() {
                 <p className="mt-2 text-gray-600">{item.description}</p>
               </motion.div>
             ))}
-          </motion.div>
-
-          <motion.div className="mt-24 text-center" variants={fadeIn}>
-            <ArrowDownCircle
-              className="mx-auto text-blue-500 animate-bounce"
-              size={48}
-            />
-            <p className="mt-4 text-gray-600">Discover More</p>
           </motion.div>
         </motion.div>
       </main>

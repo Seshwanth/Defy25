@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { Button } from "@/components/ui";
-import { Input } from "@/components/ui";
-import { Label } from "@/components/ui";
-import { Alert, AlertDescription } from "@/components/ui";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export function SignIn() {
   const [username, setUsername] = useState("");
@@ -24,7 +24,7 @@ export function SignIn() {
       setUsername("");
       setPassword("");
     } catch (err: unknown) {
-      setError((err as Error).message);
+      setError(err as string);
     }
   };
 

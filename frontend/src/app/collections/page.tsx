@@ -10,7 +10,7 @@ const mockData = {
   properties: [
     {
       id: "madurai",
-      name: "madurai pent house",
+      name: "NYC pent house",
       rent: 54,
       currency: "usdt",
       currentValue: 54,
@@ -36,7 +36,7 @@ const mockData = {
     },
     {
       id: "pic",
-      name: "pic",
+      name: "Colorado pent house",
       rent: 134,
       currency: "usdt",
       currentValue: 140,
@@ -49,7 +49,7 @@ const mockData = {
     },
     {
       id: "ild",
-      name: "ild",
+      name: "Chicago pent house",
       rent: 98,
       currency: "usdt",
       currentValue: 100,
@@ -135,12 +135,12 @@ async function CollectionsContent() {
 
         {/* Sell USDT Section */}
         <div className="flex justify-center mt-6">
-          <Button
+          {/* <Button
             variant="primary"
             className="w-full max-w-sm bg-blue-600 text-white"
           >
             Sell USDT
-          </Button>
+          </Button> */}
         </div>
       </div>
     </>

@@ -1,43 +1,59 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { ethers } from 'ethers'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui"
-import { Button } from "@/components/ui"
-import { Checkbox } from "@/components/ui"
-import { Label } from "@/components/ui"
-import { Diamond } from 'lucide-react'
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ethers } from "ethers";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui";
+import { Button } from "@/components/ui";
+import { Checkbox } from "@/components/ui";
+import { Label } from "@/components/ui";
+import { Diamond } from "lucide-react";
 
 export default function WalletConnect() {
-  const router = useRouter()
-  const [isIndian, setIsIndian] = useState(false)
-  const [residesInIndia, setResidesInIndia] = useState(false)
-  const [walletAddress, setWalletAddress] = useState('')
-  const [error, setError] = useState('')
+  const router = useRouter();
+  const [isIndian, setIsIndian] = useState(false);
+  const [residesInIndia, setResidesInIndia] = useState(false);
+  const [walletAddress, setWalletAddress] = useState("");
+  const [error, setError] = useState("");
 
   const connectWallet = async () => {
     if (!isIndian || !residesInIndia) {
-      setError('You must be Indian and reside in India to continue')
-      return
+      setError("You must be Indian and reside in India to continue");
+      return;
     }
 
     try {
-      if (!window.ethereum) {
-        throw new Error('Please install MetaMask or another Web3 wallet')
+      if (typeof window.ethereum === "undefined") {
+        setError(
+          "MetaMask is not installed. Please install it from https://metamask.io/download.html"
+        );
+        return;
       }
 
-      const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      await provider.send("eth_requestAccounts", [])
-      const signer = await provider.getSigner()
-      const address = await signer.getAddress()
-      
-      setWalletAddress(address)
-      router.push('/marketplace')
+      console.log("Requesting accounts...");
+      const provider = new ethers.providers.Web3Provider(
+        window.ethereum,
+        "any"
+      );
+      const accounts = await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+
+      console.log("Wallet connected:", address);
+      setWalletAddress(address);
+      setError(""); // Clear any previous error messages
+      router.push("/marketplace");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to connect wallet')
+      console.error(err);
+      setError(err instanceof Error ? err.message : "Failed to connect wallet");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -45,9 +61,11 @@ export default function WalletConnect() {
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-center mb-4">
             <Diamond className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold ml-2">Smith</span>
+            <span className="text-2xl font-bold ml-2">RETx</span>
           </div>
-          <CardTitle className="text-2xl text-center">Connect Your Wallet</CardTitle>
+          <CardTitle className="text-2xl text-center">
+            Connect Your Wallet
+          </CardTitle>
           <CardDescription className="text-center">
             Please verify your eligibility and connect your wallet to continue
           </CardDescription>
@@ -55,7 +73,7 @@ export default function WalletConnect() {
         <CardContent className="space-y-4">
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <Checkbox 
+              <Checkbox
                 id="indian"
                 checked={isIndian}
                 onCheckedChange={(checked) => setIsIndian(checked as boolean)}
@@ -63,22 +81,22 @@ export default function WalletConnect() {
               <Label htmlFor="indian">I am Indian</Label>
             </div>
             <div className="flex items-center space-x-2">
-              <Checkbox 
+              <Checkbox
                 id="residence"
                 checked={residesInIndia}
-                onCheckedChange={(checked) => setResidesInIndia(checked as boolean)}
+                onCheckedChange={(checked) =>
+                  setResidesInIndia(checked as boolean)
+                }
               />
               <Label htmlFor="residence">I reside in India</Label>
             </div>
           </div>
 
           {error && (
-            <div className="text-sm text-red-500 text-center">
-              {error}
-            </div>
+            <div className="text-sm text-red-500 text-center">{error}</div>
           )}
 
-          <Button 
+          <Button
             className="w-full"
             onClick={connectWallet}
             disabled={!isIndian || !residesInIndia}
@@ -94,6 +112,5 @@ export default function WalletConnect() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
-
