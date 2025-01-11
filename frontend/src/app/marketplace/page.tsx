@@ -7,7 +7,6 @@ import { PropertyCard } from "@/components/property-card";
 import { PropertyDetailModal } from "@/components/property-modal-detail";
 import { WalletConnect } from "@/components/wallet-connect";
 
-// Sample data - replace with your actual data fetching logic
 const SAMPLE_PROPERTIES: Property[] = [
   {
     id: "1",
@@ -91,44 +90,52 @@ export default function Marketplace() {
     nftPriceRange: [0, 1000],
   });
 
-  const [selectedProperty, setSelectedProperty] =
-    React.useState<Property | null>(null);
+  const [selectedProperty, setSelectedProperty] = React.useState<Property | null>(null);
   const [showWalletConnect, setShowWalletConnect] = React.useState(false);
 
-  const handleBuyNow = () => {
-    setShowWalletConnect(true);
-  };
+  const handleBuyNow = () => setShowWalletConnect(true);
+
+  const filteredProperties = SAMPLE_PROPERTIES.filter((property) => {
+    return (
+      (!filters.area || property.location.includes(filters.area)) &&
+      (filters.propertyTypes.length === 0 || filters.propertyTypes.includes(property.type)) &&
+      property.estimatedValue >= filters.priceRange[0] &&
+      property.estimatedValue <= filters.priceRange[1] &&
+      property.pricePerNFT >= filters.nftPriceRange[0] &&
+      property.pricePerNFT <= filters.nftPriceRange[1]
+    );
+  });
 
   return (
-    <>
-      <div className="flex min-h-screen bg-background">
-        <SidebarFilters filters={filters} onFilterChange={setFilters} />
-        <main className="flex-1 overflow-auto">
-          <div className="container mx-auto py-8 px-4">
-            <h1 className="mb-6 text-3xl font-bold">Property Marketplace</h1>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {SAMPLE_PROPERTIES.map((property) => (
+    <div className="flex min-h-screen bg-background">
+      <SidebarFilters filters={filters} onFilterChange={setFilters} />
+      <main className="flex-1 overflow-auto">
+        <div className="container mx-auto py-8 px-4">
+          <h1 className="mb-6 text-3xl font-bold">Property Marketplace</h1>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {filteredProperties.length > 0 ? (
+              filteredProperties.map((property) => (
                 <PropertyCard
                   key={property.id}
                   property={property}
                   onClick={() => setSelectedProperty(property)}
                 />
-              ))}
-            </div>
+              ))
+            ) : (
+              <p>No properties match the selected filters.</p>
+            )}
           </div>
-        </main>
+        </div>
+      </main>
 
-        <PropertyDetailModal
-          property={selectedProperty}
-          isOpen={!!selectedProperty}
-          onClose={() => setSelectedProperty(null)}
-          onBuyNow={handleBuyNow}
-        />
+      <PropertyDetailModal
+        property={selectedProperty}
+        isOpen={!!selectedProperty}
+        onClose={() => setSelectedProperty(null)}
+        onBuyNow={handleBuyNow}
+      />
 
-        {showWalletConnect && (
-          <WalletConnect onClose={() => setShowWalletConnect(false)} />
-        )}
-      </div>
-    </>
+      {showWalletConnect && <WalletConnect onClose={() => setShowWalletConnect(false)} />}
+    </div>
   );
 }

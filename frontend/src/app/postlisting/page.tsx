@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { toast } from "sonner"
+import { toast } from 'sonner'
 import { submitListing } from './actions'
 import { Building, DollarSign, FileText, ImageIcon, Share2 } from 'lucide-react'
 
@@ -25,17 +25,11 @@ export default function PostListing() {
     
     try {
       await submitListing(formData)
-      toast({
-        title: "Listing submitted successfully!",
-        description: "Your property has been listed.",
-      })
+      toast.success("Listing submitted successfully!")
       router.push('/listings')
     } catch (error) {
-      toast({
-        title: "Error submitting listing",
-        description: "Please try again later.",
-        variant: "destructive",
-      })
+      console.log(error)
+      toast.error("Error submitting listing")
     } finally {
       setIsSubmitting(false)
     }

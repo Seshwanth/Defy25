@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
-import { Building, Key, Lock, Coins, ChevronDown } from 'lucide-react'
+import { Key, Lock, Coins } from 'lucide-react'
 import AnimatedBackground from '@/components/AnimatedBackground'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
@@ -40,7 +40,11 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button size="lg">Get Started</Button>
+                  <Link href="/marketplace">
+                    <Button size="lg">
+                    Get Started Now
+                    </Button>
+                  </Link>
                   <Button variant="outline" size="lg">Learn More</Button>
                 </div>
               </motion.div>
@@ -112,7 +116,11 @@ export default function Home() {
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button size="lg">Get Started Now</Button>
+                  <Link href="/marketplace">
+                    <Button size="lg">
+                    Get Started Now
+                    </Button>
+                  </Link>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button variant="outline" size="lg">Contact Sales</Button>
